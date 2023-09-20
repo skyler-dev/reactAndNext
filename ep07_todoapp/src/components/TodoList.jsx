@@ -1,8 +1,10 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useContext } from 'react';
 import TodoItem from './TodoItem';
 import './TodoList.css';
+import { TodoStateContext } from '../TodoContext';
 
-export default function TodoList({ todos, onUpdate, onDelete }) {
+export default function TodoList() {
+  const todos = useContext(TodoStateContext);
   const [search, setSearch] = useState('');
 
   const onChangeSearch = (e) => {
@@ -19,7 +21,7 @@ export default function TodoList({ todos, onUpdate, onDelete }) {
   };
 
   const { totalCount, doneCount, notDoneCount } = useMemo(() => {
-    console.log('비싼 연산')
+    console.log('비싼 연산');
     const totalCount = todos.length;
     const doneCount = todos.filter((todo) => todo.isDone).length;
     const notDoneCount = totalCount - doneCount;
@@ -45,12 +47,7 @@ export default function TodoList({ todos, onUpdate, onDelete }) {
       />
       <div className='todos_wrapper'>
         {filterTodos().map((todo) => (
-          <TodoItem
-            key={todo.id}
-            {...todo}
-            onUpdate={onUpdate}
-            onDelete={onDelete}
-          />
+          <TodoItem key={todo.id} {...todo} />
         ))}
       </div>
     </div>
