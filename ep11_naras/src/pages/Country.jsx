@@ -1,3 +1,8 @@
+import { useParams } from 'react-router-dom';
+
 export default function Country() {
-  return <div>Country</div>;
+  const pararms = useParams();
+  console.log(pararms);
+
+  return <div>Country : {pararms.code}</div>;
 }

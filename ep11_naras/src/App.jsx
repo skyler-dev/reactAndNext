@@ -17,7 +17,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/search' element={<Search />} />
-        <Route path='/country' element={<Country />} />
+        <Route path='/country/:code' element={<Country />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
       <div>
