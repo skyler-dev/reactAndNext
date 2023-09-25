@@ -1,21 +1,33 @@
 import './App.css';
 import { useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import Home from './pages/Home';
 import Search from './pages/Search';
 import Country from './pages/Country';
 import NotFound from './pages/NotFound';
 
 function App() {
-  // 경로와 리액트 컴포넌트 맵핑
-  // Routes 컴포넌트 : 현재 브라우저의 url(경로)와 일치하는 Route 컴포넌트를 찾아서, element로 설정되어 있는 컴포넌트 렌더링 함
+  const nav = useNavigate();
+  const onClick = () => {
+    nav('/search');
+  };
+
   return (
-    <Routes>
-      <Route path='/' element={<Home />} />
-      <Route path='/search' element={<Search />} />
-      <Route path='/country' element={<Country />} />
-      <Route path='*' element={<NotFound />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/search' element={<Search />} />
+        <Route path='/country' element={<Country />} />
+        <Route path='*' element={<NotFound />} />
+      </Routes>
+      <div>
+        <Link to={'/'}>Home</Link>
+        <Link to={'/search'}>search</Link>
+        <Link to={'/country'}>country</Link>
+        {/* <a href={'/'}>Home by a</a> */}
+        <button onClick={onClick}>서치 페이지로 이동</button>
+      </div>
+    </>
   );
 }
 
