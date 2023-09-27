@@ -1,13 +1,14 @@
 import { useEffect } from 'react';
 import { fetchCountries } from '@/api';
+import Seachbar from '@/components/Searchbar';
+import CountryList from '@/components/CountryList';
 
 export default function Home({ countries }) {
   return (
-    <div>
-      {countries.map((country) => (
-        <div key={country.code}>{country.commonName}</div>
-      ))}
-    </div>
+    <>
+      <Seachbar />
+      <CountryList countries={countries} />
+    </>
   );
 }
 
