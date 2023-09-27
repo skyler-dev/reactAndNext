@@ -16,7 +16,15 @@ export default function Country({ country }) {
 
 Country.Layout = SubLayout;
 
-export const getServerSideProps = async (context) => {
+// for dynamic SSG Pages
+export const getStaticPaths = async () => {
+  return {
+    paths: [{ params: { code: 'ABW' } }, { params: { code: 'KOR' } }],
+    fallback: false,
+  };
+};
+
+export const getStaticProps = async (context) => {
   // 서버 측에서 URL Parameter 이용할 경우
   const { code } = context.params;
 
