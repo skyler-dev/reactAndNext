@@ -1,5 +1,6 @@
 import style from './CountryItem.module.css';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 export default function CountryItem({
   capital,
@@ -17,11 +18,9 @@ export default function CountryItem({
 
   return (
     <div className={style.container} onClick={onClickItem}>
-      <img
-        className={style.flag_img}
-        src={flagImg}
-        alt={`${commonName}의 국기 이미지`}
-      />
+      <div className={style.flag_img}>
+        <Image src={flagImg} fill alt={`${commonName}의 국기 이미지`} />
+      </div>
       <div className={style.content}>
         <div className={style.name}>
           {flagEmoji} {commonName}
