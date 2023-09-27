@@ -48,9 +48,14 @@ export const getStaticProps = async (context) => {
     country = await fetchCountry(code);
   }
 
+  console.log(`${code} 페이지 생성!`);
+
+  // revalidate 속성 추가 -> 3초 주기로 이 페이지를 다시 생성한다(ISR 방식)
+  // 즉, 3초 주기로 getStaticProps 함수가 다시 실행됨(계속 요청을 보내고 있을 경우)
   return {
     props: {
       country,
     },
+    revalidate: 3,
   };
 };
