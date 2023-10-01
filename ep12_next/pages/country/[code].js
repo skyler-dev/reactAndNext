@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router';
 import SubLayout from '@/components/SubLayout';
 import { fetchCountry } from '@/api';
+import style from './[code].module.css';
+import Image from 'next/image';
 
 export default function Country({ country }) {
   // 클라이언트 측에서 URL Parameter 이용할 경우
@@ -23,8 +25,37 @@ export default function Country({ country }) {
   }
 
   return (
-    <div>
-      {country.commonName} {country.officialName}
+    <div className={style.container}>
+      <div className={style.header}>
+        <div className={style.commonName}>
+          {country.flagEmoji}&nbsp;{country.commonName}
+        </div>
+        <div>{country.officialName}</div>
+      </div>
+      <div className={style.flag_img}>
+        <Image
+          src={country.flagImg}
+          fill
+          alt={`${country.commonName}의 국기 이미지`}
+        />
+      </div>
+      <div className={style.body}>
+        <div>
+          <b>코드 :</b>&nbsp;{country.code}
+        </div>
+        <div>
+          <b>수도 :</b>&nbsp;{country.capital.join(', ')}
+        </div>
+        <div>
+          <b>지역 :</b>&nbsp;{country.region}
+        </div>
+        <div>
+          <b>지도 :</b>&nbsp;
+          <a target='_blank' href={country.googleMapURL} rel='noreferrer'>
+            {country.googleMapURL}
+          </a>
+        </div>
+      </div>
     </div>
   );
 }

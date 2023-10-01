@@ -2,6 +2,8 @@ import SubLayout from '@/components/SubLayout';
 import { fetchSearchResults } from '@/api';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import Searchbar from '@/components/Searchbar';
+import CountryList from '@/components/CountryList';
 
 // 기본적으로 SSG로 동작
 export default function Search() {
@@ -23,11 +25,10 @@ export default function Search() {
   }, [q]);
   // 해당 페이지에 빈 div만 렌더링 되었다가(SSG 방식), API가 완료되는 시점에 나중에 클라이언트 측에서 (CSR 방식으로) 실제 데이터가 채워져 추가로 렌더링 된다
   return (
-    <div>
-      {countries.map((country) => (
-        <div key={country.code}>{country.commonName}</div>
-      ))}
-    </div>
+    <>
+      <Searchbar q={q} />
+      <CountryList countries={countries} />
+    </>
   );
 }
 
